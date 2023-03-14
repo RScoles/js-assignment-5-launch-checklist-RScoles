@@ -23,30 +23,21 @@ form.addEventListener("submit", function(event) {
 
 
 let listedPlanets;
-  // Set listedPlanetsResponse equal to the value returned by calling myFetch()
-  let listedPlanetsResponse = myFetch();
-  listedPlanetsResponse
-    .then(function (result) {
-      listedPlanets = result;
-      console.log(listedPlanets);
-    })
-    .then(function () {
-      console.log(listedPlanets);
-      // Below this comment call the appropriate helper functions to pick a planet fom the list of planets and add that information to your destination.
+// Set listedPlanetsResponse equal to the value returned by calling myFetch()
+let listedPlanetsResponse = myFetch();
+console.log(listedPlanetsResponse);
+listedPlanetsResponse.then(function (result) {
+    listedPlanets = result;
+    console.log(listedPlanets);
+}).then(function () {
+    console.log(listedPlanets);
+    // Below this comment call the appropriate helper functions to pick a planet fom the list of planets and add that information to your destination.
+    let planetPicked = pickPlanet(listedPlanets);
+    console.log(planetPicked);
+    
+     console.log(planetPicked.name);
 
-      // Pick random planet from json
-      let index = pickPlanet(listedPlanets);
-      // Plug in json object and random planet
-      addDestinationInfo(
-        document,
-        listedPlanets[index].name,
-        listedPlanets[index].diameter,
-        listedPlanets[index].star,
-        listedPlanets[index].distance,
-        listedPlanets[index].moons,
-        listedPlanets[index].image
-      );
-      //please work!!!!!!
-      console.log(listedPlanets[index], index);
-    });
+    addDestinationInfo(document, planetPicked.name, planetPicked.diameter, planetPicked.star, planetPicked.distance, planetPicked.moons, planetPicked.image);
+ })
+
 });
